@@ -1,0 +1,75 @@
+.sky {
+  --sky-top: var(--sky-dawn-2);
+  --sky-bottom: var(--sky-dawn-1);
+  --orb: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+}
+
+/* Sol → lua. Posição (transform) e opacidades vêm de src/sky.js */
+.sky__celestial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--orb);
+  aspect-ratio: 1;
+  will-change: transform;
+}
+
+.sky__celestial > * {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.sky__halo {
+  inset: -160%;
+  background: radial-gradient(
+    circle,
+    rgb(255 246 226 / 0.55) 0%,
+    rgb(255 246 226 / 0.18) 30%,
+    rgb(255 246 226 / 0) 62%
+  );
+}
+
+.sky__sun {
+  background: radial-gradient(circle, #fffaf0 0 52%, #ffecc8 100%);
+  box-shadow: 0 0 2.5rem 0.6rem rgb(255 240 212 / 0.45);
+}
+
+.sky__sun--dusk {
+  background: radial-gradient(circle, #ffe2b8 0 40%, #f59a63 100%);
+  box-shadow: 0 0 3rem 0.8rem rgb(242 140 91 / 0.35);
+}
+
+.sky__moon {
+  background:
+    radial-gradient(circle at 34% 38%, rgb(0 0 0 / 0.06) 0 12%, transparent 13%),
+    radial-gradient(circle at 62% 60%, rgb(0 0 0 / 0.05) 0 17%, transparent 18%),
+    radial-gradient(circle at 58% 30%, rgb(0 0 0 / 0.04) 0 7%, transparent 8%),
+    #f4f0e6;
+  box-shadow: 0 0 2.5rem 0.4rem rgb(250 247 240 / 0.18);
+}
+
+/* Nuvens: cada plano é uma textura SVG gerada em src/clouds.js, repetida em
+   ladrilho. O elemento tem 1 ladrilho a mais em cada eixo para poder deslizar
+   (transform) e dar a volta sem costura. */
+.sky__clouds {
+  position: absolute;
+  inset: 0;
+}
+
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + var(--tile-w, 0px));
+  height: calc(100% + var(--tile-h, 0px));
+  background-repeat: repeat;
+  will-change: transform;
+}

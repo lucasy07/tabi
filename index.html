@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>旅 — tabi</title>
+    <meta name="description" content="[DESCRIÇÃO DO SITE]" />
+    <script>document.documentElement.classList.add('js')</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap"
+    />
+  </head>
+  <body>
+    <!-- Céu fixo: fundo interpolado, sol/lua e três planos de nuvens -->
+    <div class="sky" aria-hidden="true">
+      <div class="sky__celestial">
+        <div class="sky__halo"></div>
+        <div class="sky__sun"></div>
+        <div class="sky__sun sky__sun--dusk"></div>
+        <div class="sky__moon"></div>
+      </div>
+      <div class="sky__clouds">
+        <div class="clouds clouds--far"></div>
+        <div class="clouds clouds--mid"></div>
+        <div class="clouds clouds--near"></div>
+      </div>
+    </div>
+
+    <main>
+      <!-- Placeholders provisórios: cada seção será construída na sua vez -->
+      <section id="amanhecer" class="moment moment--dawn dawn" data-moment="dawn" aria-labelledby="dawn-name">
+        <div class="dawn__stage">
+          <div class="dawn__landscape" aria-hidden="true"></div>
+
+          <div class="dawn__title">
+            <h1 class="dawn__name" id="dawn-name" data-intro>lucasy</h1>
+            <p class="dawn__phrase" data-intro>Somos tão jovens</p>
+          </div>
+
+          <div class="dawn__veil dawn__veil--left" aria-hidden="true"></div>
+          <div class="dawn__veil dawn__veil--right" aria-hidden="true"></div>
+
+          <p class="kanji dawn__kanji" lang="ja" data-intro>
+            <span class="kanji__mask"><span class="kanji__ink">空</span></span>
+            <span class="kanji__reading" aria-hidden="true">そら</span>
+            <span class="visually-hidden" lang="pt-BR">sora, céu</span>
+          </p>
+
+          <div class="dawn__mist" aria-hidden="true">
+            <div class="dawn__mist-crest"></div>
+            <div class="dawn__mist-body"></div>
+          </div>
+        </div>
+      </section>
+      <section id="manha" class="moment moment--morning" data-moment="morning" aria-label="Manhã">
+        <p class="moment__placeholder">Manhã</p>
+      </section>
+      <section id="tarde" class="moment moment--afternoon" data-moment="afternoon" aria-label="Tarde">
+        <p class="moment__placeholder">Tarde</p>
+      </section>
+      <section id="por-do-sol" class="moment moment--sunset" data-moment="sunset" aria-label="Pôr do sol">
+        <p class="moment__placeholder">Pôr do sol</p>
+      </section>
+      <section id="noite" class="moment moment--night" data-moment="night" aria-label="Noite">
+        <p class="moment__placeholder">Noite</p>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

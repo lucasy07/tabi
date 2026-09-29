@@ -1,0 +1,130 @@
+:root {
+  /* Céu */
+  --sky-dawn-1: #f6d6c9;
+  --sky-dawn-2: #b8c6e0;
+  --sky-morning: #8ec5ff;
+  --sky-afternoon: #4a90d9;
+  --sky-sunset-1: #f28c5b;
+  --sky-sunset-2: #7a3e6b;
+  --sky-night: #0b1026;
+
+  /* Tinta */
+  --washi: #faf7f0;
+  --sumi: #1b1b1f;
+
+  /* Tipografia */
+  --font-display: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-body: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+
+  /* Escala (razão ~1.333, fluida) */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.94rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
+  --step-1: clamp(1.33rem, 1.25rem + 0.4vw, 1.6rem);
+  --step-2: clamp(1.78rem, 1.6rem + 0.9vw, 2.4rem);
+  --step-3: clamp(2.37rem, 2rem + 1.8vw, 3.8rem);
+  --step-4: clamp(3.16rem, 2.4rem + 3.8vw, 6.4rem);
+  --step-kanji: clamp(6rem, 4rem + 12vw, 16rem);
+
+  --measure: 64ch;
+  --gutter: clamp(1rem, 0.5rem + 3vw, 3rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  background: var(--sky-dawn-2);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.75;
+  color: var(--sumi);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cor da tinta por momento do dia (contraste contra o céu daquele trecho) */
+.moment {
+  position: relative;
+  min-height: 100svh;
+  padding-inline: var(--gutter);
+}
+
+.moment--dawn,
+.moment--morning,
+.moment--afternoon {
+  color: var(--sumi);
+}
+
+.moment--sunset,
+.moment--night {
+  color: var(--washi);
+}
+
+/* Provisório — some quando cada seção for construída */
+.moment:has(.moment__placeholder) {
+  min-height: 160svh;
+  display: grid;
+  place-items: center;
+}
+
+.moment__placeholder {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  opacity: 0.5;
+}

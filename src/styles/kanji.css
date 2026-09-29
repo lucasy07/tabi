@@ -1,0 +1,35 @@
+/* Kanji de seção — revelado por src/reveal.js (revealKanji) */
+.kanji {
+  --feather: 0.35em;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  max-width: none;
+  font-family: var(--font-display);
+  font-size: var(--step-kanji);
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* A janela é mais alta que o traço: a borda esfumada fica vazia em repouso */
+.kanji__mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: var(--feather);
+  margin-bottom: calc(var(--feather) * -1);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--feather)), transparent);
+}
+
+.kanji__ink {
+  display: block;
+  writing-mode: vertical-rl;
+}
+
+.kanji__reading {
+  writing-mode: vertical-rl;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  letter-spacing: 0.4em;
+  opacity: 0.7;
+}

@@ -1,0 +1,158 @@
+.dawn {
+  z-index: 2; /* o banco de névoa passa por cima do começo da manhã */
+  height: 240svh;
+  padding: 0;
+}
+
+.dawn__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow-x: clip;
+}
+
+/* Paisagem */
+.dawn__landscape {
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(15rem, 58svh, 40rem);
+  overflow: clip;
+}
+
+.dawn__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* Nome e frase */
+.dawn__title {
+  position: absolute;
+  z-index: 1;
+  top: 27svh;
+  left: calc(var(--gutter) * 1.5);
+  right: var(--gutter);
+}
+
+.dawn__name {
+  font-size: clamp(4.5rem, 1.5rem + 12vw, 12.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+}
+
+.dawn__phrase {
+  margin-top: clamp(1rem, 3svh, 2rem);
+  padding-left: 0.35em;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.3;
+}
+
+/* Véu de nuvens à frente do nome — se abre na entrada */
+.dawn__veil {
+  position: absolute;
+  z-index: 2;
+  width: 80vw;
+  height: 62svh;
+  background-size: 100% 100%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.dawn__veil--left {
+  top: 12svh;
+  left: -12vw;
+}
+
+.dawn__veil--right {
+  top: 20svh;
+  left: 28vw;
+}
+
+/* Kanji */
+.dawn__kanji {
+  position: absolute;
+  z-index: 3;
+  top: clamp(3rem, 9svh, 7rem);
+  right: calc(var(--gutter) * 1.5);
+}
+
+/* Banco de nuvens que sobe com o scroll e fecha a cena */
+.dawn__mist {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  inset-inline: 0;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.dawn__mist-crest {
+  height: 44svh;
+  background-size: 100% 100%;
+}
+
+.dawn__mist-body {
+  height: 130svh;
+  margin-top: -20svh;
+  background: linear-gradient(
+    to bottom,
+    rgb(252 248 246 / 0) 0%,
+    rgb(252 248 246 / 0.96) 22%,
+    rgb(252 248 246 / 0.96) 58%,
+    rgb(252 248 246 / 0) 100%
+  );
+}
+
+/* Estado inicial da entrada (só com JS e movimento) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .dawn [data-intro] {
+    visibility: hidden;
+  }
+
+  .js .dawn__mist {
+    transform: translateY(100svh);
+  }
+}
+
+/* Movimento reduzido: cena já revelada, sem véu nem névoa */
+@media (prefers-reduced-motion: reduce) {
+  .dawn {
+    height: auto;
+  }
+
+  .dawn__stage {
+    position: relative;
+  }
+
+  .dawn__veil,
+  .dawn__mist {
+    display: none;
+  }
+}
+
+@media (max-width: 40rem) {
+  .dawn__title {
+    top: 36svh;
+    left: var(--gutter);
+  }
+
+  .dawn__kanji {
+    --step-kanji: 6.5rem;
+    top: 6svh;
+    right: var(--gutter);
+  }
+
+  .dawn__veil {
+    width: 110vw;
+  }
+
+  .dawn__veil--right {
+    left: 10vw;
+  }
+}
