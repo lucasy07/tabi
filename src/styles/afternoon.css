@@ -110,13 +110,26 @@
   text-wrap: balance;
 }
 
+/* Todos os movimentos em tinta cheia (contraste); os já executados ganham um
+   traço fino embaixo, que se estende da esquerda para a direita. */
 .algo__move {
-  opacity: 0.4;
-  transition: opacity 0.5s ease;
+  position: relative;
 }
 
-.algo__move.is-done {
-  opacity: 1;
+.algo__move::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  inset-inline: 0;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.algo__move.is-done::after {
+  transform: scaleX(1);
 }
 
 .afternoon__god {
@@ -142,7 +155,7 @@
     min-height: 100svh;
   }
 
-  .algo__move {
+  .algo__move::after {
     transition: none;
   }
 }
