@@ -85,8 +85,32 @@
           </ol>
         </div>
       </section>
-      <section id="tarde" class="moment moment--afternoon" data-moment="afternoon" aria-label="Tarde">
-        <p class="moment__placeholder">Tarde</p>
+      <section id="tarde" class="moment moment--afternoon afternoon" data-moment="afternoon" aria-labelledby="afternoon-phrase">
+        <div class="afternoon__stage">
+          <header class="afternoon__intro">
+            <p class="kanji afternoon__kanji" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">知</span></span>
+              <span class="kanji__reading" aria-hidden="true">ち</span>
+              <span class="visually-hidden" lang="pt-BR">chi, conhecimento</span>
+            </p>
+            <h2 class="afternoon__phrase" id="afternoon-phrase" lang="en" data-intro>Time Flows Ever Onward</h2>
+          </header>
+
+          <div class="afternoon__cube">
+            <div class="cube-view" role="img" aria-label="Cubo mágico sendo resolvido, movimento a movimento">
+              <div class="cube"></div>
+            </div>
+            <p class="afternoon__algo">
+              <span class="visually-hidden">Sequência de solução:</span>
+              <span class="afternoon__moves"></span>
+            </p>
+          </div>
+
+          <p class="afternoon__god" data-intro>
+            Qualquer embaralhada pode ser resolvida em até 20 movimentos. É o
+            número de Deus, provado com busca em computador em 2010.
+          </p>
+        </div>
       </section>
       <section id="por-do-sol" class="moment moment--sunset" data-moment="sunset" aria-label="Pôr do sol">
         <p class="moment__placeholder">Pôr do sol</p>

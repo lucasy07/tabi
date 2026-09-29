@@ -22,7 +22,7 @@ const C = {
 const STATES = {
   dawn: { top: C.dawn2, bottom: C.dawn1, angle: 166, sun: 1, dusk: 0.45, moon: 0, halo: 0.9, clouds: 0.95 },
   morning: { top: C.morning, bottom: interpolate(C.morning, C.washi, 0.45), angle: 122, sun: 1, dusk: 0, moon: 0, halo: 0.7, clouds: 1 },
-  afternoon: { top: C.afternoon, bottom: C.morning, angle: 72, sun: 1, dusk: 0, moon: 0, halo: 0.6, clouds: 0.9 },
+  afternoon: { top: C.afternoon, bottom: C.morning, angle: 96, sun: 1, dusk: 0, moon: 0, halo: 0.6, clouds: 0.9 },
   sunset: { top: C.sunset2, bottom: C.sunset1, angle: 20, sun: 1, dusk: 1, moon: 0, halo: 0.85, clouds: 0.7 },
   night: { top: C.night, bottom: interpolate(C.night, C.sunset2, 0.28), angle: 46, sun: 0, dusk: 0, moon: 1, halo: 0.22, clouds: 0.18 },
 };
@@ -86,27 +86,48 @@ export function initSky({ reduced }) {
     return;
   }
 
-  // Céu contínuo: cada estado é "pleno" quando o centro da sua seção passa
-  // pelo centro da tela; entre dois estados, interpolação com easing sine.
-  let anchors = [];
+  // Céu contínuo. Dois ritmos:
+  // - cores e opacidades ficam no estado da seção enquanto ela ocupa a tela
+  //   e fazem a transição na passagem para a próxima (garante o contraste
+  //   do texto de cada seção);
+  // - o sol/lua anda sem parar: cada ângulo é "pleno" quando o centro da
+  //   seção passa pelo centro da tela.
+  // Entre dois estados, interpolação com easing sine.
+  let holds = [];
+  let centers = [];
   const lerps = states.slice(1).map((s, i) => interpolate(states[i], s));
   const ease = gsap.parseEase('sine.inOut');
 
   function measure() {
     const vh = window.innerHeight;
     const max = ScrollTrigger.maxScroll(window);
-    anchors = sections.map((s) => clamp(0, max, s.offsetTop + s.offsetHeight / 2 - vh / 2));
-    anchors[0] = 0;
-    anchors[anchors.length - 1] = max;
+    const at = (y) => clamp(0, max, y);
+    // a troca de cor começa quando o texto da seção anterior já quase saiu
+    // (¼ de tela antes do topo da próxima) e termina ½ tela depois
+    holds = sections.map((s, i) => {
+      const next = sections[i + 1];
+      return [i ? at(s.offsetTop + vh * 0.5) : 0, next ? at(next.offsetTop - vh * 0.25) : max];
+    });
+    centers = sections.map((s) => at(s.offsetTop + s.offsetHeight / 2 - vh / 2));
+    centers[0] = 0;
+    centers[centers.length - 1] = max;
+  }
+
+  // spans[i] = [início, fim] do trecho em que o estado i está pleno
+  function sample(y, spans) {
+    let i = 0;
+    while (i < lerps.length - 1 && y > spans[i + 1][0]) i++;
+    const from = spans[i][1];
+    const to = spans[i + 1][0];
+    return lerps[i](ease(clamp(0, 1, (y - from) / (to - from || 1))));
   }
 
   function render(y) {
-    let i = 0;
-    while (i < lerps.length - 1 && y > anchors[i + 1]) i++;
-    const span = anchors[i + 1] - anchors[i] || 1;
-    apply(lerps[i](ease(clamp(0, 1, (y - anchors[i]) / span))));
+    const arc = sample(y, centers.map((c) => [c, c]));
+    apply({ ...sample(y, holds), angle: arc.angle });
   }
 
+  measure();
   ScrollTrigger.create({
     start: 0,
     end: 'max',
