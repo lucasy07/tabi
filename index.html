@@ -56,8 +56,34 @@
           </div>
         </div>
       </section>
-      <section id="manha" class="moment moment--morning" data-moment="morning" aria-label="Manhã">
-        <p class="moment__placeholder">Manhã</p>
+      <section id="manha" class="moment moment--morning morning" data-moment="morning" aria-labelledby="morning-phrase">
+        <div class="morning__stage">
+          <header class="morning__intro">
+            <p class="kanji morning__kanji" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">力</span></span>
+              <span class="kanji__reading" aria-hidden="true">ちから</span>
+              <span class="visually-hidden" lang="pt-BR">chikara, força</span>
+            </p>
+            <h2 class="morning__phrase" id="morning-phrase" lang="en" data-intro>Life is worth living</h2>
+          </header>
+
+          <!-- A barra: as três habilidades se movem em relação a esta linha -->
+          <div class="morning__bar" aria-hidden="true"></div>
+          <ol class="morning__skills">
+            <li class="skill skill--pullup">
+              <span class="skill__num" lang="ja" aria-hidden="true">一</span>
+              <span class="skill__word" lang="en">pull-up</span>
+            </li>
+            <li class="skill skill--muscleup">
+              <span class="skill__num" lang="ja" aria-hidden="true">二</span>
+              <span class="skill__word" lang="en">muscle-up</span>
+            </li>
+            <li class="skill skill--handstand">
+              <span class="skill__num" lang="ja" aria-hidden="true">三</span>
+              <span class="skill__word" lang="en">handstand</span>
+            </li>
+          </ol>
+        </div>
       </section>
       <section id="tarde" class="moment moment--afternoon" data-moment="afternoon" aria-label="Tarde">
         <p class="moment__placeholder">Tarde</p>

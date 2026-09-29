@@ -1,0 +1,191 @@
+.morning {
+  height: 420svh;
+  padding: 0;
+}
+
+.morning__stage {
+  /* geometria da barra — palavras e numerais se posicionam a partir dela */
+  --bar-x: 30vw;
+  --bar-w: 60vw;
+  --bar-y: 64svh;
+  --word-size: clamp(2.8rem, 1rem + 6.5vw, 8rem);
+
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow-x: clip;
+}
+
+/* Kanji em pé à esquerda, frase apoiada na base dele */
+.morning__intro {
+  position: absolute;
+  top: clamp(3rem, 9svh, 7rem);
+  left: calc(var(--gutter) * 1.5);
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.morning__phrase {
+  max-width: 14ch;
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* A barra */
+.morning__bar {
+  position: absolute;
+  top: var(--bar-y);
+  left: var(--bar-x);
+  width: var(--bar-w);
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+.morning__skills {
+  padding: 0;
+  list-style: none;
+}
+
+.skill {
+  position: absolute;
+  top: var(--bar-y);
+  left: var(--bar-x);
+  width: var(--bar-w);
+}
+
+/* Em repouso, a palavra está pendurada: o topo encosta na barra.
+   yPercent -50 = queixo acima da barra; -100 = apoiada sobre ela. */
+.skill__word {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  font-family: var(--font-display);
+  font-size: var(--word-size);
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.skill__num {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .morning [data-intro],
+  .js .morning .skill {
+    visibility: hidden;
+  }
+
+  .js .morning__bar {
+    transform: scaleX(0);
+  }
+}
+
+/* Movimento reduzido: as três poses empilhadas, cada uma com sua barra */
+@media (prefers-reduced-motion: reduce) {
+  .morning {
+    height: auto;
+  }
+
+  .morning__stage {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    padding: clamp(3rem, 9svh, 7rem) var(--gutter) 8rem;
+  }
+
+  .morning__intro {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding-left: calc(var(--gutter) * 0.5);
+  }
+
+  .morning__bar {
+    display: none;
+  }
+
+  .morning__skills {
+    display: grid;
+    gap: 2rem;
+    margin-top: 6rem;
+  }
+
+  .skill {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: calc(var(--word-size) * 2.2);
+  }
+
+  .skill::before {
+    content: '';
+    position: absolute;
+    top: 55%;
+    inset-inline: 0;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.85;
+  }
+
+  .skill__word {
+    top: 55%;
+  }
+
+  .skill__num {
+    bottom: calc(45% + 0.9rem);
+  }
+
+  .skill--pullup .skill__word {
+    transform: translateY(-50%);
+  }
+
+  .skill--muscleup .skill__word {
+    transform: translateY(-100%);
+  }
+
+  .skill--handstand .skill__word {
+    transform: translateY(-100%) scaleY(-1);
+  }
+}
+
+@media (max-width: 40rem) {
+  .morning__stage {
+    --bar-x: 13vw;
+    --bar-w: 80vw;
+    --bar-y: 62svh;
+    --word-size: clamp(2.4rem, 1rem + 7vw, 3.4rem);
+  }
+
+  .morning__intro {
+    left: var(--gutter);
+  }
+
+  .morning__kanji {
+    --step-kanji: 6.5rem;
+  }
+
+  .morning__phrase {
+    font-size: var(--step-1);
+  }
+}
+
+/* No mobile o numeral sai de cima da barra e marca a ponta dela */
+@media (max-width: 40rem) and (prefers-reduced-motion: no-preference) {
+  .skill__num {
+    left: -2.2rem;
+    bottom: -0.5em;
+  }
+}
