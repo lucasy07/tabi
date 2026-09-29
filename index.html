@@ -112,8 +112,38 @@
           </p>
         </div>
       </section>
-      <section id="por-do-sol" class="moment moment--sunset" data-moment="sunset" aria-label="Pôr do sol">
-        <p class="moment__placeholder">Pôr do sol</p>
+      <section id="por-do-sol" class="moment moment--sunset sunset" data-moment="sunset" aria-labelledby="sunset-phrase">
+        <div class="sunset__stage">
+          <header class="sunset__intro">
+            <p class="kanji sunset__kanji" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">家族</span></span>
+              <span class="kanji__reading" aria-hidden="true">かぞく</span>
+              <span class="visually-hidden" lang="pt-BR">kazoku, família</span>
+            </p>
+            <h2 class="sunset__phrase" id="sunset-phrase" lang="en" data-intro>A Sunrise Worth Seeing</h2>
+          </header>
+
+          <!-- A barra da manhã volta como horizonte; a família fica em pé sobre ela -->
+          <div class="sunset__horizon" aria-hidden="true"></div>
+          <ol class="sunset__family" aria-label="Família">
+            <li class="kanji member" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">父</span></span>
+              <span class="kanji__reading" lang="pt-BR">pai</span>
+            </li>
+            <li class="kanji member" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">母</span></span>
+              <span class="kanji__reading" lang="pt-BR">mãe</span>
+            </li>
+            <li class="kanji member" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">妹</span></span>
+              <span class="kanji__reading" lang="pt-BR">irmã</span>
+            </li>
+            <li class="kanji member" lang="ja" data-intro>
+              <span class="kanji__mask"><span class="kanji__ink">私</span></span>
+              <span class="kanji__reading" lang="pt-BR">eu</span>
+            </li>
+          </ol>
+        </div>
       </section>
       <section id="noite" class="moment moment--night" data-moment="night" aria-label="Noite">
         <p class="moment__placeholder">Noite</p>

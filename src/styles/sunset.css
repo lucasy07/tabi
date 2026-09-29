@@ -1,0 +1,124 @@
+.sunset {
+  height: 280svh;
+  padding: 0;
+}
+
+.sunset__stage {
+  /* altura do horizonte = altura do sol no meio da seção (src/sky.js) */
+  --horizon: 64svh;
+
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow-x: clip;
+}
+
+/* Kanji à esquerda; frase no alto, onde o céu ainda é ameixa */
+.sunset__intro {
+  position: absolute;
+  top: clamp(3rem, 9svh, 7rem);
+  left: calc(var(--gutter) * 1.5);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.sunset__kanji {
+  --step-kanji: clamp(4.5rem, 3rem + 7vw, 10rem);
+}
+
+.sunset__phrase {
+  max-width: 13ch;
+  padding-top: 0.2em;
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* Horizonte */
+.sunset__horizon {
+  position: absolute;
+  top: var(--horizon);
+  inset-inline: var(--gutter);
+  height: 1.5px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+/* A família: colunas em pé sobre o horizonte */
+.sunset__family {
+  position: absolute;
+  bottom: calc(100% - var(--horizon));
+  left: 56%;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(2rem, 5vw, 5.5rem);
+  padding: 0;
+  list-style: none;
+  transform: translateX(-50%);
+}
+
+.member {
+  --step-kanji: clamp(3.4rem, 2rem + 4.5vw, 7rem);
+  --feather: 0.3em;
+  gap: 0.4rem;
+}
+
+.member .kanji__reading {
+  font-size: var(--step-1);
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .sunset [data-intro] {
+    visibility: hidden;
+  }
+
+  .js .sunset__horizon {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sunset {
+    height: auto;
+  }
+
+  .sunset__stage {
+    position: relative;
+    min-height: 100svh;
+  }
+}
+
+@media (max-width: 40rem) {
+  .sunset__stage {
+    --horizon: 66svh;
+  }
+
+  .sunset__intro {
+    left: var(--gutter);
+  }
+
+  .sunset__kanji {
+    --step-kanji: 4rem;
+  }
+
+  .sunset__phrase {
+    font-size: var(--step-1);
+  }
+
+  /* mais compacta e à esquerda: o sol se põe na ponta direita */
+  .sunset__family {
+    left: 41%;
+    gap: 1rem;
+  }
+
+  .member {
+    --step-kanji: 2.4rem;
+  }
+
+  .member .kanji__reading {
+    font-size: var(--step-0);
+  }
+}

@@ -5,6 +5,7 @@ import './styles/kanji.css';
 import './styles/dawn.css';
 import './styles/morning.css';
 import './styles/afternoon.css';
+import './styles/sunset.css';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,6 +17,7 @@ import { buildClouds, animateClouds } from './clouds.js';
 import { initDawn } from './sections/dawn.js';
 import { initMorning } from './sections/morning.js';
 import { initAfternoon } from './sections/afternoon.js';
+import { initSunset } from './sections/sunset.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -47,7 +49,7 @@ mm.add(
     }
 
     initSky({ reduced });
-    for (const init of [initDawn, initMorning, initAfternoon]) {
+    for (const init of [initDawn, initMorning, initAfternoon, initSunset]) {
       const cleanup = init({ reduced });
       if (cleanup) cleanups.push(cleanup);
     }
