@@ -17,6 +17,7 @@
   <body>
     <!-- Céu fixo: fundo interpolado, sol/lua e três planos de nuvens -->
     <div class="sky" aria-hidden="true">
+      <div class="sky__stars"></div>
       <div class="sky__celestial">
         <div class="sky__halo"></div>
         <div class="sky__sun"></div>
@@ -145,8 +146,26 @@
           </ol>
         </div>
       </section>
-      <section id="noite" class="moment moment--night" data-moment="night" aria-label="Noite">
-        <p class="moment__placeholder">Noite</p>
+      <section id="noite" class="moment moment--night night" data-moment="night" aria-labelledby="night-phrase">
+        <div class="night__end">
+          <h2 class="night__phrase" id="night-phrase" lang="en" data-intro>Before the Light Fades</h2>
+
+          <!-- Colofão: o dia inteiro numa coluna, pincelado de uma vez -->
+          <p class="kanji night__day" lang="ja" data-intro>
+            <span class="kanji__mask" aria-hidden="true">
+              <span class="kanji__ink"><span>空</span><span>力</span><span>知</span><span>家族</span></span>
+            </span>
+            <span class="visually-hidden" lang="pt-BR">O dia: céu, força, conhecimento, família.</span>
+          </p>
+
+          <footer class="night__footer">
+            <ul class="night__links">
+              <li><a href="https://github.com/lucasy07">github.com/lucasy07</a></li>
+              <li><a href="mailto:lucasyoshimura07@gmail.com">lucasyoshimura07@gmail.com</a></li>
+            </ul>
+            <a class="night__rewind" href="#amanhecer">voltar ao amanhecer</a>
+          </footer>
+        </div>
       </section>
     </main>
 

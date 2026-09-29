@@ -18,14 +18,14 @@ const C = {
  * Estado do céu em cada momento do dia.
  * angle: posição do sol/lua no arco (180° = horizonte esquerdo, 0° = direito).
  * hold: até que altura (%) a cor do topo se mantém antes do degradê começar.
- * sun / dusk / moon / halo / clouds: opacidades.
+ * sun / dusk / moon / halo / clouds / stars: opacidades.
  */
 const STATES = {
-  dawn: { hold: 0, top: C.dawn2, bottom: C.dawn1, angle: 166, sun: 1, dusk: 0.45, moon: 0, halo: 0.9, clouds: 0.95 },
-  morning: { hold: 0, top: C.morning, bottom: interpolate(C.morning, C.washi, 0.45), angle: 122, sun: 1, dusk: 0, moon: 0, halo: 0.7, clouds: 1 },
-  afternoon: { hold: 0, top: C.afternoon, bottom: C.morning, angle: 96, sun: 1, dusk: 0, moon: 0, halo: 0.6, clouds: 0.9 },
-  sunset: { hold: 35, top: C.sunset2, bottom: C.sunset1, angle: 20, sun: 1, dusk: 1, moon: 0, halo: 0.85, clouds: 0.7 },
-  night: { hold: 0, top: C.night, bottom: interpolate(C.night, C.sunset2, 0.28), angle: 46, sun: 0, dusk: 0, moon: 1, halo: 0.22, clouds: 0.18 },
+  dawn: { hold: 0, top: C.dawn2, bottom: C.dawn1, angle: 166, sun: 1, dusk: 0.45, moon: 0, halo: 0.9, clouds: 0.95, stars: 0 },
+  morning: { hold: 0, top: C.morning, bottom: interpolate(C.morning, C.washi, 0.45), angle: 122, sun: 1, dusk: 0, moon: 0, halo: 0.7, clouds: 1, stars: 0 },
+  afternoon: { hold: 0, top: C.afternoon, bottom: C.morning, angle: 96, sun: 1, dusk: 0, moon: 0, halo: 0.6, clouds: 0.9, stars: 0 },
+  sunset: { hold: 35, top: C.sunset2, bottom: C.sunset1, angle: 20, sun: 1, dusk: 1, moon: 0, halo: 0.85, clouds: 0.7, stars: 0 },
+  night: { hold: 0, top: C.night, bottom: interpolate(C.night, C.sunset2, 0.28), angle: 46, sun: 0, dusk: 0, moon: 1, halo: 0.22, clouds: 0.18, stars: 1 },
 };
 
 export function initSky({ reduced }) {
@@ -37,6 +37,7 @@ export function initSky({ reduced }) {
     moon: sky.querySelector('.sky__moon'),
     halo: sky.querySelector('.sky__halo'),
     clouds: sky.querySelector('.sky__clouds'),
+    stars: sky.querySelector('.sky__stars'),
   };
   const sections = gsap.utils.toArray('[data-moment]');
   const states = sections.map((s) => STATES[s.dataset.moment]);

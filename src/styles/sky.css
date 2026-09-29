@@ -11,6 +11,16 @@
   background: linear-gradient(to bottom, var(--sky-top) var(--sky-hold, 0%), var(--sky-bottom));
 }
 
+/* Estrelas: textura SVG gerada em src/sections/night.js. Paradas — só a
+   opacidade muda, com o estado "noite". Rareiam perto do horizonte. */
+.sky__stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-repeat: repeat;
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 92%);
+}
+
 /* Sol → lua. Posição (transform) e opacidades vêm de src/sky.js */
 .sky__celestial {
   position: absolute;

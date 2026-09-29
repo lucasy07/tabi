@@ -6,6 +6,7 @@ import './styles/dawn.css';
 import './styles/morning.css';
 import './styles/afternoon.css';
 import './styles/sunset.css';
+import './styles/night.css';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,6 +19,7 @@ import { initDawn } from './sections/dawn.js';
 import { initMorning } from './sections/morning.js';
 import { initAfternoon } from './sections/afternoon.js';
 import { initSunset } from './sections/sunset.js';
+import { initNight } from './sections/night.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -32,9 +34,10 @@ mm.add(
   (context) => {
     const { reduced } = context.conditions;
     const cleanups = [];
+    let lenis;
 
     if (!reduced) {
-      const lenis = new Lenis({ lerp: 0.08 });
+      lenis = new Lenis({ lerp: 0.08 });
       const raf = (time) => lenis.raf(time * 1000);
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(raf);
@@ -49,8 +52,8 @@ mm.add(
     }
 
     initSky({ reduced });
-    for (const init of [initDawn, initMorning, initAfternoon, initSunset]) {
-      const cleanup = init({ reduced });
+    for (const init of [initDawn, initMorning, initAfternoon, initSunset, initNight]) {
+      const cleanup = init({ reduced, lenis });
       if (cleanup) cleanups.push(cleanup);
     }
 

@@ -115,16 +115,3 @@ main {
 .moment--night {
   color: var(--washi);
 }
-
-/* Provisório — some quando cada seção for construída */
-.moment:has(.moment__placeholder) {
-  min-height: 160svh;
-  display: grid;
-  place-items: center;
-}
-
-.moment__placeholder {
-  font-family: var(--font-display);
-  font-size: var(--step-1);
-  opacity: 0.5;
-}

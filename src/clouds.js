@@ -15,7 +15,7 @@ const LAYERS = [
   { selector: '.clouds--near', tile: [1800, 1150], count: 3, scale: [0.95, 1.4], alpha: 0.85, drift: 15, parallax: 0.34, seed: 41 },
 ];
 
-function random(seed) {
+export function random(seed) {
   // mulberry32: determinístico, para as nuvens serem sempre as mesmas
   return () => {
     seed |= 0;

@@ -1,0 +1,109 @@
+/* A seção não fica fixa: rola até o fim. O conteúdo mora na última tela. */
+.night {
+  height: 170svh;
+  padding: 0;
+}
+
+.night__end {
+  position: absolute;
+  inset: auto 0 0;
+  height: 100svh;
+}
+
+.night__phrase {
+  position: absolute;
+  top: 38%;
+  left: calc(var(--gutter) * 1.5);
+  max-width: 11ch;
+  font-size: var(--step-4);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+/* Colofão pendurado abaixo da lua (a lua fica a ~79% da largura) */
+.night__day {
+  --step-kanji: var(--step-2);
+  --feather: 0.5em;
+
+  position: absolute;
+  top: 50%;
+  left: 79%;
+  transform: translateX(-50%);
+}
+
+.night__day .kanji__ink {
+  letter-spacing: 0.15em;
+}
+
+.night__day .kanji__ink > span + span {
+  margin-inline-start: 0.9em; /* na escrita vertical, inline = vertical */
+}
+
+.night__footer {
+  position: absolute;
+  bottom: clamp(1.5rem, 5svh, 3rem);
+  inset-inline: calc(var(--gutter) * 1.5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  font-size: var(--step--1);
+}
+
+.night__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.night__footer a {
+  display: inline-block;
+  padding-block: 0.4rem; /* alvo de toque mais confortável */
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.night__footer a:hover,
+.night__footer a:focus-visible {
+  opacity: 1;
+}
+
+.night__rewind {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .night [data-intro] {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 40rem) {
+  .night__phrase {
+    top: 46%;
+    left: var(--gutter);
+    font-size: var(--step-3);
+  }
+
+  /* à esquerda: a lua ocupa a direita */
+  .night__day {
+    top: 12%;
+    left: var(--gutter);
+    transform: none;
+  }
+
+  .night__footer {
+    inset-inline: var(--gutter);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .night__links {
+    flex-direction: column;
+    gap: 0;
+  }
+}
