@@ -110,8 +110,9 @@
 
   /* mais compacta e à esquerda: o sol se põe na ponta direita */
   .sunset__family {
-    left: 41%;
-    gap: 1rem;
+    left: var(--gutter);
+    gap: 0.8rem;
+    transform: none;
   }
 
   .member {
